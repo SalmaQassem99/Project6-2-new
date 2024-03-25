@@ -31,9 +31,9 @@ $gap-2: 2vh;
 }
 %sizes {
   width: fit-content;
+  max-height: 0;
   padding: 1vh 2vh;
   gap: 1vh;
-  display: none;
   position: absolute;
   bottom: 100%;
   left: 50%;
@@ -41,9 +41,14 @@ $gap-2: 2vh;
   z-index: -1;
   background-color: $green-2;
   border-radius: 2.5vh 2.5vh 0 0;
+  transition: 0.55s linear;
+  visibility: hidden;
+  overflow: hidden;
+  cursor: default;
 
   &.show {
-    display: flex;
+    max-height: 50vh;
+    visibility: visible;
   }
   @include mediaQuery($medScreen_min_width) {
     & {

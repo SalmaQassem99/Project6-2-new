@@ -6,8 +6,8 @@ const cardWrapper = document.querySelector(".game .cardContainer");
 const body = document.querySelector(".body");
 const pencilSizeButtons = document.querySelectorAll(".size-btn");
 const pencilSizes = document.querySelector(".pencil .sizes");
-const pencil = document.querySelector(".pencil");
-const eraser = document.querySelector(".eraser");
+const pencil = document.querySelector(".pencil .pencil-item");
+const eraser = document.querySelector(".eraser .eraser-item");
 const eraserSizes = document.querySelector(".eraser .eraser-sizes");
 const eraserSizeButtons = document.querySelectorAll(
   ".eraser .eraser-sizes .eraser-size"
@@ -75,10 +75,15 @@ pencilSizeButtons.forEach((button) => {
     } else {
       currentColor = "#000";
     }
+    pencilSizes.classList.remove("show");
   });
 });
 pencil.addEventListener("click", () => {
-  pencilSizes.classList.add("show");
+  if (pencilSizes.classList.contains("show")) {
+    pencilSizes.classList.remove("show");
+  } else {
+    pencilSizes.classList.add("show");
+  }
 });
 eraserSizeButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -86,12 +91,15 @@ eraserSizeButtons.forEach((button) => {
     eraserSize = size;
     currentTool = "eraser";
     currentColor = "#ffff";
+    eraserSizes.classList.remove("show");
   });
 });
 eraser.addEventListener("click", () => {
-  eraser.classList.add("active");
-  eraserSizes.classList.add("show");
-  brush.classList.remove("active");
+  if (eraserSizes.classList.contains("show")) {
+    eraserSizes.classList.remove("show");
+  } else {
+    eraserSizes.classList.add("show");
+  }
 });
 brush.addEventListener("click", () => {
   brush.classList.add("active");
@@ -124,7 +132,6 @@ const draw = () => {
 };
 const start = (event) => {
   event.preventDefault();
-  console.log(currentTool);
   isDrawing = true;
   context.beginPath();
   context.moveTo(getX(event), getY(event));
